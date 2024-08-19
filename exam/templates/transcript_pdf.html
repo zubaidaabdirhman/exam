@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1, h2 { text-align: center; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { border: 1px solid #000; padding: 8px; text-align: center; }
+        p { margin: 5px 0; }
+        .signature { margin-top: 40px; }
+    </style>
+</head>
+<body>
+    <h1>University Name</h1>
+    <p>Student Name: {{ student.name }}</p>
+    <p>Student ID: {{ student.student_id }}</p>
+    <p>Batch: {{ student.batch }}</p>
+
+    <h2>Semester: {{ semester.name }}</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Subject Code</th>
+                <th>Subject Title</th>
+                <th>Credits</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for course in courses %}
+            <tr>
+                <td>{{ course.code }}</td>
+                <td>{{ course.title }}</td>
+                <td>{{ course.credits }}</td>
+                <td>{{ grades|get_item:course }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="2"><strong>Total</strong></td>
+                <td>{{ total_credits }}</td>
+                <td>{{ gpa }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>Grade Point Average (GPA): {{ gpa }}</p>
+    
+    <div class="signature">
+        <p>Registrar Signature: ___________________________</p>
+        <p>University Seal: ___________________________</p>
+    </div>
+</body>
+</html>

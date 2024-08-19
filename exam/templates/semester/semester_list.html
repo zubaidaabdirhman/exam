@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container mx-auto p-6 bg-white shadow-lg rounded-lg mt-8">
+    <div class="text-center mb-4">
+        <h1 class="text-3xl font-bold">Semester List</h1>
+    </div>
+    <!-- Create Semester Button -->
+    <div class="mb-4">
+        <a href="{% url 'create_semester' %}" 
+           class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+           Create Semester
+        </a>
+    </div>
+
+    <!-- Search Form -->
+    <form method="get" class="mb-4 text-center">
+        <input type="text" name="q" placeholder="Search students" value="{{ request.GET.q }}" 
+               class="p-2 border rounded">
+        <button type="submit" class="p-2 bg-blue-500 text-white rounded">Search</button>
+    </form>
+    <!-- Semester Table -->
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-sm">
+            <thead class="bg-blue-500 text-white">
+                <tr>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Semester Name</th>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Start Date</th>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">End Date</th>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm"></th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-700">
+                {% for semester in semesters %}
+                    <tr class="border-b border-gray-200 hover:bg-gray-50">
+                        <td class="py-3 px-4">{{ semester.name }}</td>
+                        <td class="py-3 px-4">{{ semester.start_date }}</td>
+                        <td class="py-3 px-4">{{ semester.end_date }}</td>
+                        <td class="py-3 px-4 text-right">
+                            <a href="{% url 'semester_detail' semester.id %}" 
+                               class="text-blue-500 hover:underline">
+                               View
+                            </a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4" class="py-3 px-4 text-center text-gray-500">
+                            No semesters available.
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Examination System{% endblock %}</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4 text-white">
+        <div class="container mx-auto flex justify-between">
+            <a href="{% url 'home' %}" class="text-2xl font-bold">Examination System</a>
+            <div>
+                <a href="{% url 'course_list' %}" class="mr-4">Courses</a>
+                <a href="{% url 'semester_list' %}" class="mr-4">Semesters</a>
+                <a href="{% url 'student_list' %}" class="mr-4">Students</a>
+                <a href="{% url 'faculty_list' %}" class="mr-4">Faculty</a>
+                <a href="{% url 'batch_list' %}" class="mr-4">Batch</a>
+                <a href="{% url 'exam_results_list' %}" class="mr-4">Exams</a>
+                {% comment %} <a href="{% url 'generate_transcript' student_id=student.id %}">View Transcript</a> {% endcomment %}
+                {% comment %} <a href="{% url 'logout' %}" class="ml-4">Logout</a> {% endcomment %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="container mx-auto mt-8">
+        {% block content %}
+        <!-- Content will be injected here -->
+        {% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white p-4 mt-8">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Examination System. All rights reserved.</p>
+        </div>
+    </footer>
+    
+</body>
+</html>

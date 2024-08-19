@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% load custom_filters %}
+
+{% block content %}
+<div class="container mx-auto p-6 bg-white shadow-lg rounded-lg mt-8">
+    <h1 class="text-3xl font-bold mb-4">Academic Transcript for {{ student.name }}</h1>
+    <p><strong>Student ID:</strong> {{ student.student_id }}</p>
+    <p><strong>Batch:</strong> {{ student.batch }}</p>
+
+    <h2 class="text-xl font-semibold mt-6">Semester-wise SGPA</h2>
+    <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-sm mt-4">
+        <thead class="bg-blue-500 text-white">
+            <tr>
+                <th class="text-left py-3 px-4">Semester</th>
+                <th class="text-left py-3 px-4">SGPA</th>
+            </tr>
+        </thead>
+        <tbody class="text-gray-700">
+            {% for semester in semesters %}
+            <tr class="border-b border-gray-200">
+                <td class="py-3 px-4">{{ semester.name }}</td>
+                <td class="py-3 px-4">
+                    {% if sgpas|get_item:semester %}
+                        {{ sgpas|get_item:semester|floatformat:2 }}
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2 class="text-xl font-semibold mt-6">Overall OGPA</h2>
+    <p class="text-lg font-medium">{{ ogpa|floatformat:2 }}</p>
+</div>
+<button onclick="window.print()" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Print Transcript</button>
+{% endblock %}

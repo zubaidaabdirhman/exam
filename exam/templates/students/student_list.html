@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mx-auto p-6 bg-white shadow-lg rounded-lg mt-8">
+    <!-- Header -->
+    <div class="text-center mb-4">
+        <h1 class="text-3xl font-bold">Student List</h1>
+    </div>
+
+    <!-- Add New Student Button -->
+    <div class="mb-4">
+        <a href="{% url 'student_create' %}" 
+           class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+           Add New Student
+        </a> 
+    </div>
+
+    <!-- Search Form -->
+    <form method="get" class="mb-4 text-center">
+        <input type="text" name="q" placeholder="Search students" value="{{ request.GET.q }}" 
+               class="p-2 border rounded">
+        <button type="submit" class="p-2 bg-blue-500 text-white rounded">Search</button>
+    </form>
+
+    <!-- Student Table -->
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-sm">
+            <thead class="bg-blue-500 text-white">
+                <tr>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Name</th>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Student ID</th>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Batch</th>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Contact</th>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Courses</th>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-700">
+                {% for student in students %}
+                    <tr class="border-b border-gray-200 hover:bg-gray-50">
+                        <td class="py-3 px-4">{{ student.name }}</td>
+                        <td class="py-3 px-4">{{ student.id }}</td>
+                        <td class="py-3 px-4">{{ student.batch }}</td>
+                        <td class="py-3 px-4">{{ student.contact_details }}</td>
+                        <td class="py-3 px-4">
+                            <ul>
+                                {% for course in student.courses.all %}
+                                    <li>{{ course.title }} ({{ course.code }})</li>
+                                {% empty %}
+                                    <li>No courses enrolled.</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td class="py-3 px-4 text-right">
+                            <a href="{% url 'student_update' student.pk %}" 
+                               class="text-blue-500 hover:underline">Edit</a> | 
+                            <a href="{% url 'student_delete' student.pk %}" 
+                               class="text-red-500 hover:underline">Delete</a> |
+                            <a href="{% url 'student_transcript' student.pk %}" 
+                               class="text-green-500 hover:underline">View Transcript</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6" class="py-3 px-4 text-center text-gray-500">
+                            No students found.
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

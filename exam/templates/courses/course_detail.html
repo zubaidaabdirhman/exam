@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <h1 class="text-3xl font-bold mb-4">{{ course.title }}</h1>
+        <p class="text-lg"><strong>Code:</strong> {{ course.code }}</p>
+        <p class="text-lg"><strong>Credit Hours:</strong> {{ course.credit_hours }}</p>
+        <p class="text-lg"><strong>Semester:</strong> {{ course.semester.name }}</p> <!-- Display semester name -->
+        <p class="text-lg"><strong>Faculty:</strong> {{ course.faculty.name }}</p> <!-- Display faculty name -->
+        
+        <div class="mt-6">
+            <a href="{% url 'update_course' course.pk %}" class="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600">Edit</a>
+            <a href="{% url 'delete_course' course.pk %}" class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 ml-2">Delete</a>
+            <a href="{% url 'course_list' %}" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 ml-2">Back to List</a> <!-- Optional: Link back to the list view -->
+        </div>
+    </div>
+</div>
+{% endblock  %}

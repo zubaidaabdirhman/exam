@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <h1 class="text-3xl font-bold mb-4">{{ semester.name }}</h1>
+        <p class="text-lg"><strong>Start Date:</strong> {{ semester.start_date }}</p>
+        <p class="text-lg"><strong>End Date:</strong> {{ semester.end_date }}</p>
+        
+        <div class="mt-6">
+            <a href="{% url 'update_semester' semester.pk %}" class="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600">Edit</a>
+            <a href="{% url 'delete_semester' semester.pk %}" class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 ml-2">Delete</a>
+            <a href="{% url 'semester_list' %}" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 ml-2">Back to List</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

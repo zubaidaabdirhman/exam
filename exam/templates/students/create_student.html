@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="max-w-sm mx-auto bg-white p-6 rounded-lg shadow-lg">
+    <h1 class="text-xl font-semibold mb-4 text-center text-gray-800">Student Form</h1>
+    <form method="POST" class="space-y-4">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="flex flex-col space-y-1">
+                <label class="text-gray-700 font-medium">{{ field.label_tag }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                    <p class="text-sm text-gray-500">{{ field.help_text }}</p>
+                {% endif %}
+                {% if field.errors %}
+                    <p class="text-red-500 text-sm">{{ field.errors }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submi  t" class="w-full bg-blue-600 text-white py-2 px-3 rounded-lg hover:bg-blue-700 transition duration-300 shadow-md">
+            Save
+        </button>
+    </form>
+</div>
+{% endblock %}

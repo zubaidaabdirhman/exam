@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container mx-auto">
+    <h2 class="text-2xl font-semibold mb-4">Delete Exam Result</h2>
+    <p>Are you sure you want to delete the exam result for {{ exam_result.student.name }} in the course {{ exam_result.course.title }}?</p>
+    <form method="post" class="mt-4" {% url 'exam_result_list' %}>
+        {% csrf_token %}
+        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+            Confirm Delete
+        </button>
+        <a href="{% url 'exam_result_list' %}" class="ml-4 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+            Cancel
+        </a>
+    </form>
+</div>
+{% endblock %}

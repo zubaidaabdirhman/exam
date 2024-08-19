@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <h1 class="text-3xl font-bold mb-4">Are you sure you want to delete "{{ batch.name }}"?</h1>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="p-2 bg-red-500 text-white rounded">Confirm Delete</button>
+            <a href="{% url 'batch_list' %}" class="p-2 bg-gray-500 text-white rounded ml-2">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock  %}

@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container mx-auto">
+    <h2 class="text-2xl font-semibold mb-4">Add Exam Result</h2>
+    <form method="post" actions="{% url 'add_exam_result' %}">
+        {% csrf_token %}
+        <div class="mb-4">
+            <label for="student" class="block text-gray-700">Student</label>
+            {{ form.student }}
+        </div>
+        <div class="mb-4">
+            <label for="course" class="block text-gray-700">Course</label>
+            {{ form.course }}
+        </div>
+        <div class="mb-4">
+            <label for="semester" class="block text-gray-700">Semester</label>
+            {{ form.semester }}
+        </div>
+        <div class="mb-4">
+            <label for="score" class="block text-gray-700">Score</label>
+            {{ form.score }}
+        </div>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Add Result
+        </button>
+    </form>
+</div>
+{% endblock %}

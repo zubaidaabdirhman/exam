@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="bg-white shadow-md rounded-lg p-6 max-w-md mx-auto">
+        <h1 class="text-2xl font-bold mb-4 text-red-600">Delete Course</h1>
+        <p class="mb-6 text-lg">Are you sure you want to delete "<span class="font-semibold">{{ course.title }}</span>"?</p>
+        
+        <form method="post" class="flex items-center justify-between">
+            {% csrf_token %}
+            <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600">Yes, Delete</button>
+            <a href="{% url 'course_list' %}" class="text-gray-600 hover:underline">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock  %}

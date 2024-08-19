@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Are you sure you want to delete "{{ student.name }}"?</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Confirm</button>
+        <a href="{% url 'student_list' %}">Cancel</a>
+    </form>
+{% endblock  %}

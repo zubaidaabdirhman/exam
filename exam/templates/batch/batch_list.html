@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block content %}\
+<div class="container mx-auto px-4 py-8">
+    <div class="text-center mb-4">
+        <h1 class="text-3xl font-bold">Batch List</h1>
+    </div>
+    <div class="mb-5">
+        <a href="{% url 'batch_create' %}" class="p-2 bg-blue-500 text-white rounded">Add Batch</a>
+    </div>
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <table class="min-w-full bg-white">
+            <thead>
+                <tr>
+                    <th class="py-2 px-4 border-b text-left">Name</th>
+                    <th class="py-2 px-4 border-b text-left">Year</th>
+                    <th class="py-2 px-4 border-b text-left">Course</th>
+                    <th class="py-2 px-4 border-b text-left">Semester</th>
+                    <th class="py-2 px-4 border-b text-left">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for batch in batches %}
+                <tr>
+                    <td class="py-2 px-4 border-b">{{ batch.name }}</td>
+                    <td class="py-2 px-4 border-b">{{ batch.year }}</td>
+                    <td class="py-2 px-4 border-b">{{ batch.course }}</td>
+                    <td class="py-2 px-4 border-b">{{ batch.semester.name }}</td>
+                    <td class="py-2 px-4 border-b">
+                        <a href="{% url 'batch_update' batch.pk %}" class="bg-yellow-500 text-white py-1 px-3 rounded hover:bg-yellow-600">Edit</a>
+                        <a href="{% url 'batch_delete' batch.pk %}" class="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 ml-2">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="py-2 px-4 border-b text-center">No batches found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock  %}
